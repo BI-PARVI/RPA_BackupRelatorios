@@ -1,6 +1,6 @@
 from config.settings import RELATORIOS, PASTA_REPOSITORIO, REPOSITORIO, MENSAGEM_COMMIT
 from core.browser import Browser
-from core.relatorio_manager import RelatorioManager
+from core.relatorio import RelatorioManager
 from core.github_manager import GitHubManager
 from utils.log import log
 
