@@ -6,7 +6,8 @@ pipeline {
         JIRA_CREDS = credentials('jira_credentials')
         JIRA_URL = 'https://parvibi.atlassian.net/rest/api/3'
         JIRA_PROJECT_KEY = 'SCRUM' 
-
+  }
+  
   triggers {
     cron('H/10 0-19 * * *')
   }
