@@ -7,7 +7,7 @@ pipeline {
         JIRA_URL = 'https://parvibi.atlassian.net/rest/api/3'
         JIRA_PROJECT_KEY = 'SCRUM' 
   }
-  
+
   triggers {
     cron('H/10 0-19 * * *')
   }
@@ -22,25 +22,25 @@ pipeline {
         checkout scm
       }
     }
+  }
+
 
     stage('Install venv & deps') {
-      steps {
-        sh '''
-          python -m venv .venv
-          . .venv/bin/activate
-          pip install --upgrade pip
-          pip install -r requirements.txt
-        '''
-      }
-    }
+  steps {
+    bat """
+      python -m venv .venv
+      .venv\\Scripts\\activate
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
+    """
+  }
+}
 
-    stage('Run') {
-      steps {
-        sh '''
-          . .venv/bin/activate
-          python main.py
-        '''
-      }
-    }
+stage('Run') {
+  steps {
+    bat """
+      .venv\\Scripts\\activate
+      python main.py
+    """
   }
 }
