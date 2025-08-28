@@ -2,26 +2,41 @@ pipeline {
     agent any
 
     environment {
-        PYTHON_PATH = "C:\\Program Files\\Python313\\python.exe"
+        REPOSITORIO = 'https://github.com/BI-PARVI/Backup_Relatorios.git'
+        JIRA_CREDS = credentials('jira_credentials')
+        JIRA_URL = 'https://parvibi.atlassian.net/rest/api/3'
+        JIRA_PROJECT_KEY = 'SCRUM'
+    }
+
+    triggers {
+        cron('H/10 0-19 * * *')
+    }
+
+    options {
+        timestamps()
     }
 
     stages {
-        stage('Checkout') {
+        stage('Clonar o repositório') {
             steps {
-                checkout scm
+                git branch: 'main',
+                    url: 'https://github.com/BI-PARVI/RPA_BackupRelatorios.git'
             }
         }
 
-        stage('Setup & Run') {
+        stage('Instalar dependências') {
             steps {
-                bat """
-                  "%PYTHON_PATH%" -m venv .venv
-                  call .venv\\Scripts\\activate.bat
-                  python -m pip install --upgrade pip
-                  pip install -r requirements.txt
-                  python main.py
-                """
+                bat '"C:\\Users\\adm.luiz.vinicius\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\pip.exe" install -r requirements.txt'
             }
         }
+
+        stage('Executar script Python') {
+            steps {
+                bat '''
+            C:\\Users\\adm.luiz.vinicius\\AppData\\Local\\Programs\\Python\\Python312\\python.exe main.py > script_log.txt 2>&1
+            type script_log.txt
+        '''
+    }
+}
     }
 }
