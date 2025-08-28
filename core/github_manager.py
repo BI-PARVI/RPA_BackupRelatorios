@@ -34,7 +34,8 @@ class GitHubManager:
                 remotes = self._run(["git", "remote"], cwd=self.repo_path, check=False, capture=True)
                 if "origin" not in remotes.stdout.split():
                     self._run(["git", "remote", "add", "origin", self.repo_url], cwd=self.repo_path)
-
+                    
+        self._run(["git", "lfs", "install"], cwd=self.repo_path)
         self._run(["git", "add", "."], cwd=self.repo_path)
 
         diff = self._run(["git", "diff", "--cached", "--quiet"], cwd=self.repo_path, check=False)
