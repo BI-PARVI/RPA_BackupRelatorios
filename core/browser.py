@@ -14,6 +14,7 @@ class Browser:
         options = Options()
         options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
         prefs = {
+            "download.default_directory": r"C:\Users\adm.joao.mendes\Downloads",
             "download.prompt_for_download": False,
             "download.directory_upgrade": True,
             "safebrowsing.enabled": True,
