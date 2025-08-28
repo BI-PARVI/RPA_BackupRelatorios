@@ -1,0 +1,19 @@
+# Ignorar variáveis de ambiente
+.env
+
+# Cache do Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs
+*.log
+
+# Ambientes virtuais
+venv/
+.env/
+.venv/
+
+# Downloads temporários
+*.tmp
+*.swp
