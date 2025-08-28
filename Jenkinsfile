@@ -6,7 +6,6 @@ pipeline {
         JIRA_CREDS = credentials('jira_credentials')
         JIRA_URL = 'https://parvibi.atlassian.net/rest/api/3'
         JIRA_PROJECT_KEY = 'SCRUM'
-        PATH = "C:\\Program Files\\Python313;C:\\Program Files\\Python313\\Scripts;%PATH%"
     }
 
     triggers {
@@ -24,21 +23,13 @@ pipeline {
             }
         }
 
-        stage('Install venv & deps') {
+        stage('Setup & Run') {
             steps {
                 bat """
-                  python -m venv .venv
-                  .venv\\Scripts\\activate
+                  "C:\\Program Files\\Python313\\python.exe" -m venv .venv
+                  call .venv\\Scripts\\activate.bat
                   python -m pip install --upgrade pip
                   pip install -r requirements.txt
-                """
-            }
-        }
-
-        stage('Run') {
-            steps {
-                bat """
-                  .venv\\Scripts\\activate
                   python main.py
                 """
             }
