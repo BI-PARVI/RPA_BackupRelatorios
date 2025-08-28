@@ -6,6 +6,7 @@ pipeline {
         JIRA_CREDS = credentials('jira_credentials')
         JIRA_URL = 'https://parvibi.atlassian.net/rest/api/3'
         JIRA_PROJECT_KEY = 'SCRUM'
+        PATH = "C:\\Program Files\\Python313;C:\\Program Files\\Python313\\Scripts;%PATH%"
     }
 
     triggers {
