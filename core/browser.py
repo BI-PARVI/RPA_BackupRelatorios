@@ -6,6 +6,7 @@ from config.settings import CAMINHO_CHROME, CAMINHO_PERFIL
 class Browser:
     def __init__(self):
         self.driver = None
+        self.chrome_process = None
 
     def start(self):
         comando = f'"{CAMINHO_CHROME}" --remote-debugging-port=9222 --user-data-dir="{CAMINHO_PERFIL}"'
@@ -28,3 +29,5 @@ class Browser:
     def quit(self):
         if self.driver:
             self.driver.quit()
+        if self.chrome_process:
+            self.chrome_process.terminate()

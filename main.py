@@ -18,7 +18,7 @@ class Main:
 
         log("\n[OK] Backup Realizado com Sucesso!")
         self.browser.quit()
-
+        
         GitHubManager(PASTA_REPOSITORIO, REPOSITORIO, MENSAGEM_COMMIT).atualizar()
 
 if __name__ == "__main__":
