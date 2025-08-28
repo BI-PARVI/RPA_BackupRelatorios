@@ -97,14 +97,14 @@ class RelatorioManager:
                 os.remove(caminho_final)
 
             shutil.move(arquivo_original, caminho_final)
-            log(f"✅ {nome_relatorio} salvo em {caminho_final}")
+            log(f"[OK] {nome_relatorio} salvo em {caminho_final}")
 
             # Tenta criar task no Jira (evita duplicata por título)
             titulo = f"ALTERAÇÃO FEITA NO RELATORIO : {nome_relatorio} Por {usuario} - {ultima_data}"
             self.jira.criar_task(titulo, assignee_username=usuario)
 
         except Exception as e:
-            log(f"❌ Erro ao renomear/mover {nome_relatorio}: {e}")
+            log(f"[ERRO] Erro ao renomear/mover {nome_relatorio}: {e}")
 
     # ———————— PIPELINE DE UM RELATÓRIO ———————— #
     def processar_relatorio(self, relatorio_web_element, pasta_destino: str) -> None:
@@ -145,7 +145,7 @@ class RelatorioManager:
                 tentativas += 1
 
             if not self.precisa_baixar(nome_relatorio, span_text, pasta_destino):
-                log(f"➡️ {nome_relatorio} já está atualizado. Pulando.")
+                log(f"[>>] {nome_relatorio} já está atualizado. Pulando.")
                 try:
                     self._fechar_popup()
                 except Exception:
@@ -166,7 +166,7 @@ class RelatorioManager:
                 pass
 
         except Exception as e:
-            log(f"⚠️ Erro ao processar relatório: {e}")
+            log(f"[WARN] Erro ao processar relatório: {e}")
 
     def _fechar_popup(self):
         botao_fechar = WebDriverWait(self.driver, 5).until(

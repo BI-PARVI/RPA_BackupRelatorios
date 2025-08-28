@@ -30,7 +30,7 @@ class JiraManager:
     def criar_task(self, titulo: str, assignee_username: str | None = None):
         """Cria task apenas se não existir com o MESMO summary."""
         if self.issue_exists_with_exact_summary(titulo):
-            log(f"🟡 Task já existe no Jira com o mesmo título. Pulando criação: {titulo}")
+            log(f"[WARN] Task já existe no Jira com o mesmo título. Pulando criação: {titulo}")
             return None
 
         assignee_id = JIRA_USERS.get(assignee_username or "", None)
@@ -57,7 +57,7 @@ class JiraManager:
         )
         if r.status_code == 201:
             key = r.json().get("key")
-            log(f"✅ Task criada no Jira: {key}")
+            log(f"[OK] Task criada no Jira: {key}")
             return key
-        log(f"❌ Erro ao criar task no Jira: {r.status_code} - {r.text}")
+        log(f"[ERROR] Erro ao criar task no Jira: {r.status_code} - {r.text}")
         return None

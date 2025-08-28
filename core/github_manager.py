@@ -40,14 +40,14 @@ class GitHubManager:
         diff = self._run(["git", "diff", "--cached", "--quiet"], cwd=self.repo_path, check=False)
         if diff.returncode != 0:
             self._run(["git", "commit", "-m", self.commit_message], cwd=self.repo_path)
-            log("✅ Commit realizado!")
+            log("[OK] Commit realizado!")
         else:
-            log("⚠️ Nenhuma alteração para commitar.")
+            log("[WARN] Nenhuma alteração para commitar.")
 
         self._run(["git", "branch", "-M", "main"], cwd=self.repo_path, check=False)
 
         try:
             self._run(["git", "push", "-u", "origin", "main"], cwd=self.repo_path)
-            log("✅ Alterações enviadas para GitHub com sucesso!")
+            log("[OK] Alterações enviadas para GitHub com sucesso!")
         except subprocess.CalledProcessError as e:
-            log(f"❌ Erro ao enviar para o GitHub: {e}")
+            log(f"[ERROR] Erro ao enviar para o GitHub: {e}")
