@@ -9,7 +9,7 @@ class Browser:
     def start(self):
         options = Options()
         # usar perfil já configurado
-        options.add_argument(f'--user-data-dir={CAMINHO_PERFIL}')
+        # options.add_argument(f'--user-data-dir={CAMINHO_PERFIL}')
         options.add_argument("--disable-blink-features=AutomationControlled")
 
         prefs = {
