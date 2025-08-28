@@ -16,7 +16,7 @@ class Main:
             log(f"\nIniciando backup de {nome_pasta}...")
             rel_manager.baixar_relatorios_em_massa(dados["link"], dados["pasta"])
 
-        log("\n✅ Backup Realizado com Sucesso!")
+        log("\n[OK] Backup Realizado com Sucesso!")
         self.browser.quit()
 
         GitHubManager(PASTA_REPOSITORIO, REPOSITORIO, MENSAGEM_COMMIT).atualizar()

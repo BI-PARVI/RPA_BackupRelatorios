@@ -33,8 +33,7 @@ pipeline {
         stage('Executar script Python') {
             steps {
                 bat '''
-            C:\\Users\\adm.luiz.vinicius\\AppData\\Local\\Programs\\Python\\Python312\\python.exe main.py > script_log.txt 2>&1
-            type script_log.txt
+            C:\\Users\\adm.luiz.vinicius\\AppData\\Local\\Programs\\Python\\Python312\\python.exe main.py
         '''
     }
 }
