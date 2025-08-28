@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # ————— CAMINHOS ————— #
-CAMINHO_PERFIL = r"C:\chrome-debug"
+CAMINHO_PERFIL = r"C:\Users\adm.joao.mendes\AppData\Local\Google\Chrome\User Data"
 CAMINHO_CHROME = r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
 PASTA_DOWNLOADS = r"C:\Users\adm.joao.mendes\Downloads"
 PASTA_REPOSITORIO = r"C:\Users\adm.joao.mendes\Documents\BACKUP RELATORIOS BI"
