@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # ————— CAMINHOS ————— #
-CAMINHO_PERFIL = r"C:\Users\adm.joao.mendes\AppData\Local\Google\Chrome\User Data"
+CAMINHO_PERFIL = r"C:\chrome-debug"
 CAMINHO_CHROME = r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
 PASTA_DOWNLOADS = r"C:\Users\adm.joao.mendes\Downloads"
 PASTA_REPOSITORIO = r"C:\Users\adm.joao.mendes\Documents\BACKUP RELATORIOS BI"
@@ -32,7 +32,7 @@ JIRA_USERS={
 # ————— CATEGORIAS/PASTAS ————— #
 RELATORIOS = {
     "adm_auditoria": {
-        "link": "http://bi.intranetparvi.com.br/PBIReports/browse/Adm%20Fin%20Cont/Auditoria",
+        "link": "http://joao.mendes:Parvi@2025@bi.intranetparvi.com.br/PBIReports/browse/Adm%20Fin%20Cont/Auditoria",
         "pasta": rf"{PASTA_REPOSITORIO}\Adm Fin Cont\Auditoria"
     },
     "adm_cobrancas": {
