@@ -32,7 +32,7 @@ JIRA_USERS={
 # ————— CATEGORIAS/PASTAS ————— #
 RELATORIOS = {
     "adm_auditoria": {
-        "link": "http://parvi\sqlbi:sql@bi!parvi@bi.intranetparvi.com.br/PBIReports/browse/Adm%20Fin%20Cont/Auditoria",
+        "link": "http://sqlbi:sql%40bi%21parvi@bi.intranetparvi.com.br/PBIReports/browse/Adm%20Fin%20Cont/Auditoria",
         "pasta": rf"{PASTA_REPOSITORIO}\Adm Fin Cont\Auditoria"
     },
     "adm_cobrancas": {
