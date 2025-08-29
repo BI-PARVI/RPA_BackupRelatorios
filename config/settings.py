@@ -79,4 +79,24 @@ RELATORIOS = {
         "link": "http://bi.intranetparvi.com.br/PBIReports/browse/Fiscal",
         "pasta": rf"{PASTA_REPOSITORIO}\Fiscal"
     },
+        "DP": {
+        "link": "http://bi.intranetparvi.com.br/PBIReports/browse/RH%20-%20DP/DP",
+        "pasta": rf"{PASTA_REPOSITORIO}\RH - DP\DP"
+    },
+        "RH": {
+        "link": "http://bi.intranetparvi.com.br/PBIReports/browse/RH%20-%20DP/RH",
+        "pasta": rf"{PASTA_REPOSITORIO}\RH - DP\RH"
+    },    
+        "Contabilidade": {
+        "link": "http://bi.intranetparvi.com.br/PBIReports/browse/Contabilidade",
+        "pasta": rf"{PASTA_REPOSITORIO}\Contabilidade"
+    },
+        "Contabilidade_DRE": {
+        "link": "http://bi.intranetparvi.com.br/PBIReports/browse/Contabilidade/DRE'S%20IMPRESS%C3%83O",
+        "pasta": rf"{PASTA_REPOSITORIO}\Contabilidade\DRE'S IMPRESSÃO"
+    },
+        "Contabilidade_BP": {
+        "link": "http://bi.intranetparvi.com.br/PBIReports/browse/Contabilidade/BP'S%20IMPRESS%C3%83O",
+        "pasta": rf"{PASTA_REPOSITORIO}\Contabilidade\BP'S IMPRESSÃO"
+    },
 }
