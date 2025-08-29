@@ -110,6 +110,11 @@ class RelatorioManager:
     # ———————— PIPELINE DE UM RELATÓRIO ———————— #
     def processar_relatorio(self, relatorio_web_element, pasta_destino: str) -> None:
         try:
+
+            # Verifica o tipo do tile (pai do <a>)
+            tile_tag = relatorio_web_element.find_element(By.XPATH, "..").tag_name
+
+            
             ActionChains(self.driver).context_click(relatorio_web_element).perform()
 
             # título
@@ -153,8 +158,14 @@ class RelatorioManager:
                     pass
                 return
 
+            # Escolhe seletor do botão de download conforme o tipo
+            if tile_tag == "app-report-tile":
+                seletor_download = "#content > app-metadata > section > footer > div:nth-child(4) > span:nth-child(1) > a"
+            else:
+                seletor_download = "#content > app-metadata > section > footer > div:nth-child(3) > span:nth-child(1) > a > span"
+
             botao_download = WebDriverWait(self.driver, 30).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, '#content > app-metadata > section > footer > div:nth-child(3) > span:nth-child(1) > a > span'))
+                EC.element_to_be_clickable((By.CSS_SELECTOR, seletor_download))
             )
             botao_download.click()
 
