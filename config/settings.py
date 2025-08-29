@@ -32,7 +32,7 @@ JIRA_USERS={
 # ————— CATEGORIAS/PASTAS ————— #
 RELATORIOS = {
     "adm_auditoria": {
-        "link": "http://joao.mendes:Parvi@2025@bi.intranetparvi.com.br/PBIReports/browse/Adm%20Fin%20Cont/Auditoria",
+        "link": "http://parvi\sqlbi:sql@bi!parvi@bi.intranetparvi.com.br/PBIReports/browse/Adm%20Fin%20Cont/Auditoria",
         "pasta": rf"{PASTA_REPOSITORIO}\Adm Fin Cont\Auditoria"
     },
     "adm_cobrancas": {
@@ -74,5 +74,9 @@ RELATORIOS = {
     "mardisa_posVendas": {
         "link": "http://bi.intranetparvi.com.br/PBIReports/browse/BI%20Mardisa/P%C3%B3s%20Vendas",
         "pasta": rf"{PASTA_REPOSITORIO}\BI Mardisa\Pós Vendas"
+    },
+        "fiscal": {
+        "link": "http://bi.intranetparvi.com.br/PBIReports/browse/Fiscal",
+        "pasta": rf"{PASTA_REPOSITORIO}\Fiscal"
     },
 }

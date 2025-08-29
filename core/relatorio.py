@@ -78,7 +78,8 @@ class RelatorioManager:
             timeout = 120
             inicio = time.time()
             while time.time() - inicio < timeout:
-                lista = glob.glob(os.path.join(PASTA_DOWNLOADS, "*.pbix"))
+                lista = glob.glob(os.path.join(PASTA_DOWNLOADS, "*.pbix")) + \
+                        glob.glob(os.path.join(PASTA_DOWNLOADS, "*.rdl"))
                 if lista:
                     arquivo_original = max(lista, key=os.path.getctime)
                     if not arquivo_original.endswith(".crdownload"):
