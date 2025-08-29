@@ -10,8 +10,8 @@ class Browser:
 
     def start(self):
         comando = f'"{CAMINHO_CHROME}" --remote-debugging-port=9222 --user-data-dir="{CAMINHO_PERFIL}"'
-        subprocess.Popen(comando, shell=True)
-
+        self.chrome_process = subprocess.Popen(comando, shell=True)
+        
         options = Options()
         options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
         prefs = {
