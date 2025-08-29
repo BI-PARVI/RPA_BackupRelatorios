@@ -40,9 +40,9 @@ class JiraManager:
                 "project": {"key": JIRA_PROJECT_KEY},
                 "summary": titulo,
                 "issuetype": {"name": "Task"},
-                "labels": ["RPA"],
+                "labels": ["BACKUP"],
                 "duedate": DATA_HOJE,
-                "customfield_10020": 8,            
+                "customfield_10020": 114,            
                 "customfield_10037": DATA_HOJE 
             }
         }
