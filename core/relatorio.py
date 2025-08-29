@@ -181,7 +181,7 @@ class RelatorioManager:
         time.sleep(5)
 
         relatorios = WebDriverWait(self.driver, 20).until(
-            EC.presence_of_all_elements_located((By.CSS_SELECTOR, "app-power-bi-tile > app-tile-wrapper > a"))
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, "app-report-tile > app-tile-wrapper > a, app-power-bi-tile > app-tile-wrapper > a"))
         )
 
         log(f"Encontrados {len(relatorios)} relatórios em {link}")
