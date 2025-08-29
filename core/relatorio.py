@@ -188,3 +188,5 @@ class RelatorioManager:
         for relatorio in relatorios:
             self.processar_relatorio(relatorio, pasta_destino)
             time.sleep(3)
+
+    self.driver.quit()
