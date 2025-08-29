@@ -18,12 +18,6 @@ pipeline {
         timestamps()
     }
 
-    stage('Debug Variáveis') {
-    steps {
-        bat 'echo JIRA_USER=%JIRA_USER%'
-        bat 'echo JIRA_TOKEN=%JIRA_TOKEN%'
-    }
-}
 
     stages {
         stage('Clonar o repositório') {
