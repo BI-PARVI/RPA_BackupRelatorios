@@ -10,10 +10,6 @@ pipeline {
         JIRA_TOKEN = "${JIRA_CREDS_PSW}"
     }
 
-    triggers {
-        cron('H/15 7-19 * * *')
-    }
-
     options {
         timestamps()
     }

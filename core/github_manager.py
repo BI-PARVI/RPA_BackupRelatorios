@@ -7,6 +7,8 @@ class GitHubManager:
         self.repo_path = repo_path
         self.repo_url = repo_url
         self.commit_message = commit_message
+        self.commits = [] 
+
 
     def _run(self, args, cwd=None, check=True, capture=False):
         return subprocess.run(
@@ -42,6 +44,9 @@ class GitHubManager:
         if diff.returncode != 0:
             self._run(["git", "commit", "-m", self.commit_message], cwd=self.repo_path)
             log("[OK] Commit realizado!")
+            ##alteração nova
+            self.commits.append(["*", self.commit_message])
+
         else:
             log("[WARN] Nenhuma alteração para commitar.")
 

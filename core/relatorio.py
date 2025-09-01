@@ -18,6 +18,11 @@ class RelatorioManager:
     def __init__(self, driver):
         self.driver = driver
         self.jira = JiraManager()
+        
+        
+        ## Alteração nova
+        self.relatorios_baixados = []
+        self.tasks_criadas = []
 
     # ———————— REGRAS DE VERIFICAÇÃO ———————— #
     def precisa_baixar(self, nome_relatorio: str, span_text: str, pasta_base: str) -> bool:
@@ -100,9 +105,14 @@ class RelatorioManager:
             shutil.move(arquivo_original, caminho_final)
             log(f"[OK] {nome_relatorio} salvo em {caminho_final}")
 
+            ##Alteração nova
+            self.relatorios_baixados.append([novo_nome, f"{usuario} - {ultima_data}"])
+
             # Tenta criar task no Jira (evita duplicata por título)
             titulo = f"ALTERAÇÃO FEITA NO RELATORIO : {nome_relatorio} Por {usuario} - {ultima_data}"
             self.jira.criar_task(titulo, assignee_username=usuario)
+            #alteração nova
+            self.tasks_criadas.append([titulo])
 
         except Exception as e:
             log(f"[ERRO] Erro ao renomear/mover {nome_relatorio}: {e}")
