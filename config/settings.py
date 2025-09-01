@@ -55,6 +55,10 @@ RELATORIOS = {
         "link": "http://bi.intranetparvi.com.br/PBIReports/browse/P%C3%B3s%20Vendas",
         "pasta": rf"{PASTA_REPOSITORIO}\Pós Vendas"
     },
+    "pos_vendas_GerencialComp": {
+        "link": "http://bi.intranetparvi.com.br/PBIReports/browse/P%C3%B3s%20Vendas/Gerencial%20Compras",
+        "pasta": rf"{PASTA_REPOSITORIO}\Pós Vendas\Gerencial Compras"
+    },
     "pneus": {
         "link": "http://bi.intranetparvi.com.br/PBIReports/browse/Pneus",
         "pasta": rf"{PASTA_REPOSITORIO}\Pneus"
