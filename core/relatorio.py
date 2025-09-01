@@ -160,7 +160,7 @@ class RelatorioManager:
 
             # Escolhe seletor do botão de download conforme o tipo
             if tile_tag == "app-report-tile":
-                seletor_download = "#content > app-metadata > section > footer > div:nth-child(4) > span:nth-child(1) > a"
+                seletor_download = "#content > app-metadata > section > footer > div:nth-child(5) > span:nth-child(1) > a"
             else:
                 seletor_download = "#content > app-metadata > section > footer > div:nth-child(3) > span:nth-child(1) > a > span"
 
