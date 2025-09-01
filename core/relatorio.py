@@ -12,12 +12,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from config.settings import PASTA_DOWNLOADS
 from utils.file_utils import limpar_nome, esperar_download_concluir, garantir_pasta
 from utils.log import log
-# from core.jira_manager import JiraManager
+from core.jira_manager import JiraManager
 
 class RelatorioManager:
     def __init__(self, driver):
         self.driver = driver
-        # self.jira = JiraManager()
+        self.jira = JiraManager()
 
     # ———————— REGRAS DE VERIFICAÇÃO ———————— #
     def precisa_baixar(self, nome_relatorio: str, span_text: str, pasta_base: str) -> bool:
@@ -100,9 +100,9 @@ class RelatorioManager:
             shutil.move(arquivo_original, caminho_final)
             log(f"[OK] {nome_relatorio} salvo em {caminho_final}")
 
-            # # Tenta criar task no Jira (evita duplicata por título)
-            # titulo = f"ALTERAÇÃO FEITA NO RELATORIO : {nome_relatorio} Por {usuario} - {ultima_data}"
-            # self.jira.criar_task(titulo, assignee_username=usuario)
+            # Tenta criar task no Jira (evita duplicata por título)
+            titulo = f"ALTERAÇÃO FEITA NO RELATORIO : {nome_relatorio} Por {usuario} - {ultima_data}"
+            self.jira.criar_task(titulo, assignee_username=usuario)
 
         except Exception as e:
             log(f"[ERRO] Erro ao renomear/mover {nome_relatorio}: {e}")
@@ -156,10 +156,9 @@ class RelatorioManager:
                     pass
                 return
 
-            # Escolhe seletor do botão de download conforme o tipo
             if tile_tag == "app-report-tile":
                 seletor_download = "#content > app-metadata > section > footer > div:nth-child(4) > span:nth-child(1) > a"
-            else:  # app-power-bi-tile
+            else: 
                 seletor_download = "#content > app-metadata > section > footer > div:nth-child(3) > span:nth-child(1) > a > span"
 
             botao_download = WebDriverWait(self.driver, 30).until(
