@@ -91,12 +91,4 @@ RELATORIOS = {
         "link": "http://bi.intranetparvi.com.br/PBIReports/browse/Contabilidade",
         "pasta": rf"{PASTA_REPOSITORIO}\Contabilidade"
     },
-        "Contabilidade_DRE": {
-        "link": "http://bi.intranetparvi.com.br/PBIReports/browse/Contabilidade/DRE'S%20IMPRESS%C3%83O",
-        "pasta": rf"{PASTA_REPOSITORIO}\Contabilidade\DRE'S IMPRESSÃO"
-    },
-        "Contabilidade_BP": {
-        "link": "http://bi.intranetparvi.com.br/PBIReports/browse/Contabilidade/BP'S%20IMPRESS%C3%83O",
-        "pasta": rf"{PASTA_REPOSITORIO}\Contabilidade\BP'S IMPRESSÃO"
-    },
 }
