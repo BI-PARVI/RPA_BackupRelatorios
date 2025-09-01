@@ -3,7 +3,7 @@ from core.browser import Browser
 from core.relatorio import RelatorioManager
 from core.github_manager import GitHubManager
 from core.relatorio_PDF import ReportManager
-from utils.file_utils import limitar_relatorios
+from utils.limiteBackup import limitar_relatorios
 from utils.log import log
 
 class Main:
