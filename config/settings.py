@@ -21,6 +21,7 @@ JIRA_TOKEN = os.getenv("JIRA_TOKEN")
 JIRA_PROJECT_KEY = os.getenv("JIRA_PROJECT_KEY")
 DATA_HOJE = date.today().strftime("%Y-%m-%d")
 JIRA_USERS={
+        "desconhecido":"712020:142fa7a7-5676-4a87-8dc8-18e31a0164c0",
         "joao.mendes":"712020:142fa7a7-5676-4a87-8dc8-18e31a0164c0", 
         "allyf.silva":"712020:ced71a53-5125-4244-b88b-0a484a9c998f", 
         "luiz.vinicius":"712020:ab1f2aff-ad2a-4ff3-9488-1e85d70c0202", 
