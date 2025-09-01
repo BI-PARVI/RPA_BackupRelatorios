@@ -17,31 +17,22 @@ class Main:
         for nome_pasta, dados in RELATORIOS.items():
             log(f"\nIniciando backup de {nome_pasta}...")
             rel_manager.baixar_relatorios_em_massa(dados["link"], dados["pasta"])
-
             limitar_relatorios(dados["pasta"], limite=8)
 
         log("\n[OK] Backup Realizado com Sucesso!")
 
         ##Alteração nova
-
-        rel = RelatorioManager(driver)
-        git = GitHubManager("repo_path", "repo_url", "Backup automático")
-
-        # pipeline normal
-        rel.baixar_relatorios_em_massa("link", "backup_relatorio_bi")
+        
+        GitHubManager(PASTA_REPOSITORIO, REPOSITORIO, MENSAGEM_COMMIT).atualizar()
         git.atualizar()
 
         # Gera o relatório diário automaticamente
         ReportManager().gerar_relatorio(
-            rel.relatorios_baixados,
+            rel_manager.relatorios_baixados,
             git.commits,
-            rel.tasks_criadas
+            rel_manager.tasks_criadas
         )
-
         self.browser.quit()
-        
-        GitHubManager(PASTA_REPOSITORIO, REPOSITORIO, MENSAGEM_COMMIT).atualizar()
-
 
 if __name__ == "__main__":
     Main().run()
