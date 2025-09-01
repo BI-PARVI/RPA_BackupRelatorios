@@ -12,7 +12,7 @@ PASTA_REPOSITORIO = r"C:\Users\adm.joao.mendes\Documents\BACKUP RELATORIOS BI"
 
 # ————— GITHUB ————— #
 REPOSITORIO = os.getenv("REPOSITORIO")
-MENSAGEM_COMMIT = f"Backup dos relatorios DATA: {datetime.today().strftime('%d-%m-%Y')}"
+MENSAGEM_COMMIT = f"Backup dos relatorios DATA: {datetime.today().strftime('%d-%m-%Y %H:%M:%S')}"
 
 # ————— JIRA ————— #
 JIRA_URL = os.getenv("JIRA_URL")
