@@ -23,7 +23,7 @@ class RelatorioManager:
     def precisa_baixar(self, nome_relatorio: str, span_text: str, pasta_base: str) -> bool:
         """
         Com subpasta por relatório:
-        pasta_base/<nome_relatorio_limpo>/*.pbix
+        pasta_base/<nome_relatorio_limpo>/*.pbix ou *.rdl
         """
         try:
             m = re.search(r"(\d{2}/\d{2}/\d{4} \d{2}:\d{2})", span_text)
@@ -110,11 +110,9 @@ class RelatorioManager:
     # ———————— PIPELINE DE UM RELATÓRIO ———————— #
     def processar_relatorio(self, relatorio_web_element, pasta_destino: str) -> None:
         try:
+            # Verifica o tipo do tile (sobe dois níveis)
+            tile_tag = relatorio_web_element.find_element(By.XPATH, "../..").tag_name
 
-            # Verifica o tipo do tile (pai do <a>)
-            tile_tag = relatorio_web_element.find_element(By.XPATH, "..").tag_name
-
-            
             ActionChains(self.driver).context_click(relatorio_web_element).perform()
 
             # título
@@ -160,8 +158,8 @@ class RelatorioManager:
 
             # Escolhe seletor do botão de download conforme o tipo
             if tile_tag == "app-report-tile":
-                seletor_download = "#content > app-metadata > section > footer > div:nth-child(5) > span:nth-child(1) > a"
-            else:
+                seletor_download = "#content > app-metadata > section > footer > div:nth-child(4) > span:nth-child(1) > a"
+            else:  # app-power-bi-tile
                 seletor_download = "#content > app-metadata > section > footer > div:nth-child(3) > span:nth-child(1) > a > span"
 
             botao_download = WebDriverWait(self.driver, 30).until(
@@ -200,4 +198,3 @@ class RelatorioManager:
         for relatorio in relatorios:
             self.processar_relatorio(relatorio, pasta_destino)
             time.sleep(3)
-    
