@@ -24,12 +24,11 @@ class Main:
         ##Alteração nova
         
         GitHubManager(PASTA_REPOSITORIO, REPOSITORIO, MENSAGEM_COMMIT).atualizar()
-        git.atualizar()
 
         # Gera o relatório diário automaticamente
         ReportManager().gerar_relatorio(
             rel_manager.relatorios_baixados,
-            git.commits,
+            GitHubManager.commits,
             rel_manager.tasks_criadas
         )
         self.browser.quit()
