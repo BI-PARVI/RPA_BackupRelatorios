@@ -21,9 +21,6 @@ class Main:
             limitar_relatorios(dados["pasta"], limite=8)
 
         log("\n[OK] Backup Realizado com Sucesso!")
-        self.browser.quit()
-        
-        GitHubManager(PASTA_REPOSITORIO, REPOSITORIO, MENSAGEM_COMMIT).atualizar()
 
         ##Alteração nova
 
@@ -40,6 +37,11 @@ class Main:
             git.commits,
             rel.tasks_criadas
         )
+
+        self.browser.quit()
+        
+        GitHubManager(PASTA_REPOSITORIO, REPOSITORIO, MENSAGEM_COMMIT).atualizar()
+
 
 if __name__ == "__main__":
     Main().run()
