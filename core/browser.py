@@ -26,22 +26,26 @@ class Browser:
         self.driver = webdriver.Chrome(options=options)
         return self.driver
 
-def quit(self):
-    if self.driver:
-        try:
-            self.driver.close()  
-            pass
-        try:
-            self.driver.quit()  
-        except Exception:
-            pass
-        self.driver = None
+    def quit(self):
+        if self.driver:
+            try:
+                self.driver.close()  
+            except Exception:
+                pass
+            try:
+                self.driver.quit() 
+            except Exception:
+                pass
+            self.driver = None
 
-    if self.chrome_process:
-        try:
-            self.chrome_process.terminate()  
-            self.chrome_process.wait(timeout=5)  
-        except Exception:
-            pass
-        finally:
-            self.chrome_process = None
+        if self.chrome_process:
+            try:
+                self.chrome_process.terminate()  
+                self.chrome_process.wait(timeout=5) 
+            except Exception:
+                try:
+                    self.chrome_process.kill()  
+                except Exception:
+                    pass
+            finally:
+                self.chrome_process = None
