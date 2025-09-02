@@ -12,7 +12,7 @@ class ReportManager:
         self.output_folder = output_folder
         os.makedirs(output_folder, exist_ok=True)
 
-    def gerar_relatorio(self, relatorios, commits, tasks, nome_arquivo=f"relatorio_diario{datetime.today().strftime('%d-%m-%Y %H:%M:%S')}.pdf"):
+    def gerar_relatorio(self, relatorios, commits, tasks, nome_arquivo=f"relatorio_diario{datetime.today().strftime('%d-%m-%Y_%H-%M-%S')}.pdf"):
         caminho_pdf = os.path.join(self.output_folder, nome_arquivo)
 
         doc = SimpleDocTemplate(caminho_pdf, pagesize=A4)
