@@ -29,14 +29,12 @@ class Main:
         git_manager = GitHubManager(PASTA_REPOSITORIO, REPOSITORIO, MENSAGEM_COMMIT)
         git_manager.atualizar()
 
-        # Acumula dados do ciclo
         self.storage.add_data(
             rel_manager.relatorios_baixados,
             git_manager.commits,
             rel_manager.tasks_criadas
         )
 
-        # Só gera o relatório às 19h
         hora_atual = datetime.now().strftime("%H:%M")
         if hora_atual >= "19:00" and hora_atual <= "19:05":
             data = self.storage.load()
