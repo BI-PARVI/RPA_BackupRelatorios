@@ -35,4 +35,13 @@ class Main:
         self.browser.quit()
 
 if __name__ == "__main__":
-    Main().run()
+    main = Main()   
+    try:
+        main.run()
+    except Exception as e:
+        log(f"[ERRO] {e}")
+    finally:
+        try:
+            main.browser.quit()
+        except:
+            pass
