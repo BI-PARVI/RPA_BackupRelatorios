@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
 from reportlab.lib import colors
-from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.pagesizes import A4
 from utils.log import log
 
@@ -51,7 +51,24 @@ class ReportManager:
         if not dados:
             return Paragraph("Nenhum item encontrado.", getSampleStyleSheet()["Normal"])
 
-        data = [cabecalho] + dados
+        styles = getSampleStyleSheet()
+        cell_style = ParagraphStyle(
+            name="TableCell",
+            parent=styles["Normal"],
+            fontName="Helvetica",
+            fontSize=9,
+            leading=12,
+            alignment=0,  # 0=left, 1=center, 2=right, 4=justify
+        )
+
+        dados_formatados = []
+        for linha in dados:
+            linha_formatada = [Paragraph(str(c), cell_style) for c in linha]
+            dados_formatados.append(linha_formatada)
+
+        cabecalho_formatado = [Paragraph(c, styles["Heading5"]) for c in cabecalho]
+
+        data = [cabecalho_formatado] + dados_formatados
         tabela = Table(data, colWidths=[250, 250])
 
         style = TableStyle([
