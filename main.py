@@ -5,10 +5,13 @@ from core.github_manager import GitHubManager
 from core.relatorio_PDF import ReportManager
 from utils.limiteBackup import limitar_relatorios
 from utils.log import log
+from core.relatorioJSON import StorageManager
+from datetime import datetime
 
 class Main:
     def __init__(self):
         self.browser = Browser()
+        self.storage = StorageManager()
 
     def run(self):
         driver = self.browser.start()
@@ -21,17 +24,29 @@ class Main:
 
         log("\n[OK] Backup Realizado com Sucesso!")
 
-        ##Alteração nova
+
         
         git_manager = GitHubManager(PASTA_REPOSITORIO, REPOSITORIO, MENSAGEM_COMMIT)
         git_manager.atualizar()
 
-        # Gera o relatório diário automaticamente
-        ReportManager().gerar_relatorio(
+        # Acumula dados do ciclo
+        self.storage.add_data(
             rel_manager.relatorios_baixados,
             git_manager.commits,
             rel_manager.tasks_criadas
         )
+
+        # Só gera o relatório às 19h
+        hora_atual = datetime.now().strftime("%H:%M")
+        if hora_atual >= "19:00" and hora_atual <= "19:05":
+            data = self.storage.load()
+            ReportManager().gerar_relatorio(
+                data["relatorios"],
+                data["commits"],
+                data["tasks"]
+            )
+            self.storage.reset()
+
         self.browser.quit()
 
 if __name__ == "__main__":
