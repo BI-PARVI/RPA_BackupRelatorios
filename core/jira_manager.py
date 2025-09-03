@@ -19,7 +19,6 @@ class JiraManager:
         return r.json().get("issues", [])
 
     def issue_exists_with_exact_summary(self, summary: str) -> bool:
-        # Busca por frase e depois valida igualdade exata
         jql = f'project = "{JIRA_PROJECT_KEY}" AND summary ~ "\\"{summary}\\""'
         issues = self._search_issues(jql)
         for issue in issues:
@@ -34,6 +33,11 @@ class JiraManager:
             return None
 
         assignee_id = JIRA_USERS.get(assignee_username or "", None)
+
+
+        if assignee_username and not assignee_id:
+            log(f"[WARN] Usuário desconhecido: {assignee_username}. Task não será criada.")
+            return None
 
         payload = {
             "fields": {

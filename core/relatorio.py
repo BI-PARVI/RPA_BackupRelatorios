@@ -105,13 +105,14 @@ class RelatorioManager:
             shutil.move(arquivo_original, caminho_final)
             log(f"[OK] {nome_relatorio} salvo em {caminho_final}")
 
-            ##Alteração nova
+            ##Alteração nova, apagar se necessario
             self.relatorios_baixados.append([novo_nome, f"{usuario} - {ultima_data}"])
 
             # Tenta criar task no Jira (evita duplicata por título)
             titulo = f"ALTERAÇÃO FEITA NO RELATORIO : {nome_relatorio} Por {usuario} - {ultima_data}"
             self.jira.criar_task(titulo, assignee_username=usuario)
-            #alteração nova
+            
+            ##Alteração nova, apagar se necessario
             self.tasks_criadas.append([titulo])
 
         except Exception as e:
@@ -149,7 +150,7 @@ class RelatorioManager:
 
             tentativas = 0
             while (not nome_relatorio or not span_text) and tentativas < 5:
-                time.sleep(2)
+                time.sleep(4)
                 nome_relatorio = self.driver.find_element(
                     By.CSS_SELECTOR, "#content > app-metadata > section > div.content > h3"
                 ).text.strip()
@@ -196,7 +197,7 @@ class RelatorioManager:
     # ———————— LOTE ———————— #
     def baixar_relatorios_em_massa(self, link: str, pasta_destino: str):
         self.driver.get(link)
-        time.sleep(5)
+        time.sleep(7)
 
         relatorios = WebDriverWait(self.driver, 20).until(
             EC.presence_of_all_elements_located((By.CSS_SELECTOR, "app-report-tile > app-tile-wrapper > a, app-power-bi-tile > app-tile-wrapper > a"))

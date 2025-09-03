@@ -32,7 +32,7 @@ class GitHubManager:
             else:
                 log("Inicializando repositório git local...")
                 self._run(["git", "init"], cwd=self.repo_path)
-                # adiciona remote origin se não existir
+
                 remotes = self._run(["git", "remote"], cwd=self.repo_path, check=False, capture=True)
                 if "origin" not in remotes.stdout.split():
                     self._run(["git", "remote", "add", "origin", self.repo_url], cwd=self.repo_path)
@@ -44,7 +44,8 @@ class GitHubManager:
         if diff.returncode != 0:
             self._run(["git", "commit", "-m", self.commit_message], cwd=self.repo_path)
             log("[OK] Commit realizado!")
-            ##alteração nova
+            
+            ##alteração nova, apagar se necessario.
             self.commits.append(["*", self.commit_message])
 
         else:
