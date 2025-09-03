@@ -18,9 +18,6 @@ class RelatorioManager:
     def __init__(self, driver):
         self.driver = driver
         self.jira = JiraManager()
-        
-        
-        ## Alteração nova
         self.relatorios_baixados = []
         self.tasks_criadas = []
 
