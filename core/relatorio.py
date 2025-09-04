@@ -147,7 +147,7 @@ class RelatorioManager:
 
             tentativas = 0
             while (not nome_relatorio or not span_text) and tentativas < 5:
-                time.sleep(4)
+                time.sleep(3)
                 nome_relatorio = self.driver.find_element(
                     By.CSS_SELECTOR, "#content > app-metadata > section > div.content > h3"
                 ).text.strip()
@@ -194,7 +194,7 @@ class RelatorioManager:
     # ———————— LOTE ———————— #
     def baixar_relatorios_em_massa(self, link: str, pasta_destino: str):
         self.driver.get(link)
-        time.sleep(7)
+        time.sleep(5)
 
         relatorios = WebDriverWait(self.driver, 20).until(
             EC.presence_of_all_elements_located((By.CSS_SELECTOR, "app-report-tile > app-tile-wrapper > a, app-power-bi-tile > app-tile-wrapper > a"))
