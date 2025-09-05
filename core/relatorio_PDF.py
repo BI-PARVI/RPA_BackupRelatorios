@@ -40,7 +40,9 @@ class ReportManager:
 
         # Jira
         story.append(Paragraph("📌 Tasks Jira Criadas", styles["Heading2"]))
-        story.append(self._montar_tabela(tasks, ["Task", "Descrição"]))
+        # converte dicionários em lista [titulo, descricao]
+        tasks_formatadas = [[t.get("titulo", ""), t.get("descricao", "")] for t in tasks]
+        story.append(self._montar_tabela(tasks_formatadas, ["Task", "Descrição"]))
         story.append(Spacer(1, 20))
 
         doc.build(story)

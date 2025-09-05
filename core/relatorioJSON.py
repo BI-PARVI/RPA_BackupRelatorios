@@ -35,8 +35,14 @@ class StorageManager:
 
         data["relatorios"].extend(relatorios)
         data["commits"].extend(commits)
-        data["tasks"].extend(tasks)
-
+        
+        for task in tasks:
+            task_formatada = {
+                "titulo": task.get("titulo") if isinstance(task, dict) else str(task),
+                "key": task.get("key") if isinstance(task, dict) else None,
+                "descricao": task.get("descricao") if isinstance(task, dict) else None,
+            }
+            data["tasks"].append(task_formatada)
         self.save(data)
 
     def reset(self):

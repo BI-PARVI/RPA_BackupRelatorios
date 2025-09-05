@@ -65,3 +65,13 @@ class JiraManager:
             return key
         log(f"[ERROR] Erro ao criar task no Jira: {r.status_code} - {r.text}")
         return None
+    
+    
+    def descricao_task(self, summary: str) -> str | None:
+        """Busca a descrição da issue no Jira a partir do summary."""
+        jql = f'project = "{JIRA_PROJECT_KEY}" AND summary ~ "\\"{summary}\\""'
+        issues = self._search_issues(jql)
+        for issue in issues:
+            if issue.get("fields", {}).get("summary", "") == summary:
+                return issue.get("fields", {}).get("description", None)
+        return None

@@ -7,11 +7,12 @@ from utils.limiteBackup import limitar_relatorios
 from utils.log import log
 from core.relatorioJSON import StorageManager
 from datetime import datetime
-
+from core.jira_manager import JiraManager
 class Main:
     def __init__(self):
         self.browser = Browser()
         self.storage = StorageManager()
+        self.jira = JiraManager()
 
     def run(self):
         driver = self.browser.start()
@@ -34,6 +35,14 @@ class Main:
             git_manager.commits,
             rel_manager.tasks_criadas
         )
+
+        data = self.storage.load()
+        for task in data["tasks"]:
+            if "descricao" not in task or not task["descricao"]:
+                desc = self.jira.descricao_task(task["titulo"])
+                if desc:
+                    task["descricao"] = desc
+        self.storage.save(data)
 
         hora_atual = datetime.now().strftime("%H:%M")
         if hora_atual >= "19:00" and hora_atual <= "19:05":
