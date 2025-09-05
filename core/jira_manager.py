@@ -67,31 +67,20 @@ class JiraManager:
         return None
     
     
-    # def descricao_task(self, summary: str) -> str | None:
-    #     """Busca a descrição da issue no Jira a partir do summary."""
-    #     jql = f'project = "{JIRA_PROJECT_KEY}" AND summary ~ "\\"{summary}\\""'
-    #     issues = self._search_issues(jql)
-    #     for issue in issues:
-    #         if issue.get("fields", {}).get("summary", "") == summary:
-    #             desc = issue.get("fields", {}).get("description", None)
-    #             if isinstance(desc, dict):  
-    #                 textos = []
-    #                 for bloco in desc.get("content", []):
-    #                     for item in bloco.get("content", []):
-    #                         if item.get("type") == "text":
-    #                             textos.append(item.get("text"))
-    #                 return " ".join(textos) if textos else None
-    #             return desc
-    #     return None
-
-
     def descricao_task(self, summary: str) -> str | None:
         """Busca a descrição da issue no Jira a partir do summary."""
         jql = f'project = "{JIRA_PROJECT_KEY}" AND summary ~ "\\"{summary}\\""'
         issues = self._search_issues(jql)
         for issue in issues:
             if issue.get("fields", {}).get("summary", "") == summary:
-                fields = issue.get("fields", {})
-                print(fields)  # <-- para inspecionar tudo
-                return fields.get("description", None)
+                desc = issue.get("fields", {}).get("description", None)
+                if isinstance(desc, dict):  
+                    textos = []
+                    for bloco in desc.get("content", []):
+                        for item in bloco.get("content", []):
+                            if item.get("type") == "text":
+                                textos.append(item.get("text"))
+                    return " ".join(textos) if textos else None
+                return desc
         return None
+
