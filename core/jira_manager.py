@@ -71,16 +71,14 @@ class JiraManager:
         """Busca a descrição da issue no Jira a partir do summary."""
         jql = f'project = "{JIRA_PROJECT_KEY}" AND summary ~ "\\"{summary}\\""'
         issues = self._search_issues(jql)
+        print(f"[DEBUG] Issues retornadas para summary={summary}: {len(issues)}")
         for issue in issues:
+            print(f"[DEBUG] Issue encontrada: {issue.get('key')}")
+            print(f"[DEBUG] Summary: {issue.get('fields', {}).get('summary')}")
+            print(f"[DEBUG] Fields completos: {issue.get('fields')}")
             if issue.get("fields", {}).get("summary", "") == summary:
                 desc = issue.get("fields", {}).get("description", None)
-                if isinstance(desc, dict):  
-                    textos = []
-                    for bloco in desc.get("content", []):
-                        for item in bloco.get("content", []):
-                            if item.get("type") == "text":
-                                textos.append(item.get("text"))
-                    return " ".join(textos) if textos else None
+                print(f"[DEBUG] Descrição bruta: {desc}")
                 return desc
         return None
 
