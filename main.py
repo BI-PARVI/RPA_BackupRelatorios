@@ -8,6 +8,7 @@ from utils.log import log
 from core.relatorioJSON import StorageManager
 from datetime import datetime
 from core.jira_manager import JiraManager
+ 
 class Main:
     def __init__(self):
         self.browser = Browser()
@@ -25,8 +26,6 @@ class Main:
 
         log("\n[OK] Backup Realizado com Sucesso!")
 
-
-        
         git_manager = GitHubManager(PASTA_REPOSITORIO, REPOSITORIO, MENSAGEM_COMMIT)
         git_manager.atualizar()
 
@@ -37,11 +36,20 @@ class Main:
         )
 
         data = self.storage.load()
-        for task in data["tasks"]:
-            if "descricao" not in task or not task["descricao"]:
-                desc = self.jira.descricao_task(task["titulo"])
-                if desc:
-                    task["descricao"] = desc
+
+        for i, task in enumerate(data["tasks"]):
+            if isinstance(task, dict):
+                if "descricao" not in task or not task["descricao"]:
+                    desc = self.jira.descricao_task(task.get("titulo", ""))
+                    if desc:
+                        data["tasks"][i]["descricao"] = desc
+            else:
+                data["tasks"][i] = {
+                    "titulo": str(task),
+                    "key": None,
+                    "descricao": None
+                }
+
         self.storage.save(data)
 
         hora_atual = datetime.now().strftime("%H:%M")
