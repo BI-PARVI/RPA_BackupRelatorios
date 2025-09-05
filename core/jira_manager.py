@@ -68,17 +68,31 @@ class JiraManager:
     
     
     def descricao_task(self, summary: str) -> str | None:
-        """Busca a descrição da issue no Jira a partir do summary."""
+        """Busca a descrição da issue no Jira a partir do summary (string simples ou ADF)."""
         jql = f'project = "{JIRA_PROJECT_KEY}" AND summary ~ "\\"{summary}\\""'
         issues = self._search_issues(jql)
-        print(f"[DEBUG] Issues retornadas para summary={summary}: {len(issues)}")
         for issue in issues:
-            print(f"[DEBUG] Issue encontrada: {issue.get('key')}")
-            print(f"[DEBUG] Summary: {issue.get('fields', {}).get('summary')}")
-            print(f"[DEBUG] Fields completos: {issue.get('fields')}")
             if issue.get("fields", {}).get("summary", "") == summary:
                 desc = issue.get("fields", {}).get("description", None)
-                print(f"[DEBUG] Descrição bruta: {desc}")
-                return desc
+
+                # Se já for string simples, retorna direto
+                if isinstance(desc, str):
+                    return desc
+
+                # Se for no formato ADF (dict), extrai texto
+                if isinstance(desc, dict):
+                    textos = []
+
+                    def extrair_texto(nodo):
+                        if not isinstance(nodo, dict):
+                            return
+                        if nodo.get("type") == "text" and "text" in nodo:
+                            textos.append(nodo["text"])
+                        for filho in nodo.get("content", []):
+                            extrair_texto(filho)
+
+                    extrair_texto(desc)
+                    return " ".join(textos).strip() if textos else None
+
         return None
 
